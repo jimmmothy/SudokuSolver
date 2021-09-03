@@ -38,7 +38,6 @@ bool isItPossible(int x, int y, char n, char *grid)
 
 bool sudokuSolve(char *grid)
 {
-
 	for (int y = 0; y < SUDOKU_SIZE; y++)
 		for (int x = 0; x < SUDOKU_SIZE; x++)
 			if (grid[(y * SUDOKU_SIZE) + x] == '0')
@@ -77,7 +76,7 @@ int main(int argc, char **argv)
 	char *buff = new char[SUDOKU_SIZE * SUDOKU_SIZE];
 
 	int count = 0;
-	while (getline(fd, str))
+	while (getline(fd, str) && count < (SUDOKU_SIZE * SUDOKU_SIZE))
 	{
 		if (str.size() > 0)
 		{
@@ -96,9 +95,10 @@ int main(int argc, char **argv)
 		}
 	}
 	fd.close();
+	
 	sudokuSolve(buff);
 	printGrid(buff);
-
 	delete[] buff;
+
 	return 0;
 }
