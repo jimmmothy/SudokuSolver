@@ -73,7 +73,12 @@ int main(int argc, char **argv)
 	}
 
 	string str;
-	char *buff = new char[SUDOKU_SIZE * SUDOKU_SIZE];
+	char *buff = new (nothrow) char[SUDOKU_SIZE * SUDOKU_SIZE];
+	if (!buff)
+	{
+		cout<<"Error allocating array"<<endl;
+		return 1;
+	}
 
 	int count = 0;
 	while (getline(fd, str) && count < (SUDOKU_SIZE * SUDOKU_SIZE))
